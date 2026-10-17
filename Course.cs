@@ -1,3 +1,4 @@
+// En kurs. En kurs har flera studerande, men högst MaxSeats stycken.
 class Course
 {
     public string Name { get; }
@@ -46,6 +47,22 @@ class Course
         }
 
         return student.Leave(this);
+    }
+
+    // Skriver ut deltagarlistan: vilka som går kursen.
+    public void RollCall()
+    {
+        Console.WriteLine($"Deltagare i {Name} ({students.Count}/{MaxSeats}):");
+
+        if (students.Count == 0)
+        {
+            Console.WriteLine("  (inga anmälda)");
+        }
+
+        for (int i = 0; i < students.Count; i++)
+        {
+            Console.WriteLine($"  {i + 1}. {students[i].Name}");
+        }
     }
 
     // Används bara av Student för att uppdatera kursens egen lista,

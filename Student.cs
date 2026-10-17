@@ -1,3 +1,4 @@
+// En studerande. En studerande kan gå flera kurser.
 class Student
 {
     public string Name { get; }
@@ -63,6 +64,22 @@ class Student
 
         course.RemoveStudent(this);   // håller kursens sida i synk
         return true;
+    }
+
+    // Skriver ut studentens schema: vilka kurser hen går.
+    public void Schedule()
+    {
+        Console.WriteLine($"Schema för {Name} (antal kurser: {courses.Count}):");
+
+        if (courses.Count == 0)
+        {
+            Console.WriteLine("  (inga kurser)");
+        }
+
+        for (int i = 0; i < courses.Count; i++)
+        {
+            Console.WriteLine($"  {i + 1}. {courses[i].Name}");
+        }
     }
 
     public override string ToString()

@@ -21,12 +21,14 @@ Rubrik("2. Dubbelanmälan ger inga dubbletter");
 csharp.Enroll(anna);       // samma väg igen
 anna.Join(csharp);         // andra vägen
 anna.Join(csharp);         // och en gång till
-VisaAllt();
+csharp.RollCall();
+anna.Schedule();
 
 Rubrik("3. Full kurs säger nej (Databaser har 2 platser)");
 cecilia.Join(databaser);   // plats 3 av 2 -> nej
 databaser.Enroll(david);   // också nej
-VisaAllt();
+databaser.RollCall();
+cecilia.Schedule();        // Databaser ska INTE finnas här
 
 Rubrik("4. Avanmälan åt båda hållen");
 anna.Leave(databaser);     // via studenten
@@ -35,7 +37,8 @@ VisaAllt();
 
 Rubrik("5. En plats har blivit ledig, nu kommer Cecilia med");
 cecilia.Join(databaser);
-VisaAllt();
+databaser.RollCall();
+cecilia.Schedule();
 
 Rubrik("6. Ta bort någon som inte är anmäld (ingen krasch)");
 david.Leave(webb);
@@ -71,11 +74,12 @@ void VisaAllt()
 {
     foreach (Course course in new[] { csharp, databaser, webb })
     {
-        Console.WriteLine($"{course}: {string.Join(", ", course.Students)}");
+        Console.WriteLine(course);   // ToString, t.ex. "Databaser (2/2 platser)"
+        course.RollCall();
     }
 
     foreach (Student student in new[] { anna, bilal, cecilia, david })
     {
-        Console.WriteLine($"{student}: {string.Join(", ", student.Courses)}");
+        student.Schedule();
     }
 }
