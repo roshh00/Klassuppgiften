@@ -5,8 +5,8 @@ class Course
 
     private readonly List<Student> students = new List<Student>();
 
-    // listan kan bara ändras via Enroll/Remove
-    // så att kursens och studentens listor alltid stämmer överens
+    // Skrivskyddad vy: listan kan bara ändras via Enroll/Remove (eller Student.Join/Leave),
+    // så att kursens och studentens listor alltid stämmer överens.
     public IReadOnlyList<Student> Students => students;
 
     public Course(string name, int maxSeats)
@@ -25,7 +25,7 @@ class Course
         MaxSeats = maxSeats;
     }
 
-    // Anmäler en studerande. Reglerna (dubbletter)
+    // Anmäler en studerande om det finns plats. Reglerna (dubbletter, kapacitet)
     // ligger i Student.Join, så det blir exakt samma resultat från båda hållen.
     public bool Enroll(Student student)
     {

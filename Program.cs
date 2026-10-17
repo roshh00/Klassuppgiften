@@ -1,7 +1,7 @@
 ﻿using System;
 
 Course csharp = new Course("C# Grundkurs", 3);
-Course databaser = new Course("Databaser", 2);
+Course databaser = new Course("Databaser", 2);   // liten kurs, för att visa kapacitet
 Course webb = new Course("Webbutveckling", 3);
 
 Student anna = new Student("Anna");
@@ -23,17 +23,35 @@ anna.Join(csharp);         // andra vägen
 anna.Join(csharp);         // och en gång till
 VisaAllt();
 
-Rubrik("3. Avanmälan åt båda hållen");
+Rubrik("3. Full kurs säger nej (Databaser har 2 platser)");
+cecilia.Join(databaser);   // plats 3 av 2 -> nej
+databaser.Enroll(david);   // också nej
+VisaAllt();
+
+Rubrik("4. Avanmälan åt båda hållen");
 anna.Leave(databaser);     // via studenten
 csharp.Remove(bilal);      // via kursen
 VisaAllt();
 
-Rubrik("4. Ta bort någon som inte är anmäld (ingen krasch)");
+Rubrik("5. En plats har blivit ledig, nu kommer Cecilia med");
+cecilia.Join(databaser);
+VisaAllt();
+
+Rubrik("6. Ta bort någon som inte är anmäld (ingen krasch)");
 david.Leave(webb);
 webb.Remove(david);
-bilal.Leave(csharp);       // Bilal avanmäldes redan i steg 3
+bilal.Leave(csharp);       // Bilal avanmäldes redan i steg 4
 
-Rubrik("5. Ogiltiga värden");
+Rubrik("7. Ogiltiga värden");
+try
+{
+    Course ingenPlats = new Course("Tom kurs", 0);
+}
+catch (ArgumentOutOfRangeException exception)
+{
+    Console.WriteLine($"Fel: {exception.Message}");
+}
+
 try
 {
     csharp.Enroll(null);

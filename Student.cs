@@ -4,6 +4,7 @@ class Student
 
     private readonly List<Course> courses = new List<Course>();
 
+    // Skrivskyddad vy, se kommentaren i Course.
     public IReadOnlyList<Course> Courses => courses;
 
     public Student(string name)
@@ -18,6 +19,7 @@ class Student
 
     // Går med i en kurs. Det är här reglerna sitter:
     //  1. samma kurs får inte hamna två gånger (inga dubbletter)
+    //  2. kursen får inte vara full (MaxSeats)
     // Går allt bra uppdateras BÅDA sidor: kursens Students och studentens Courses.
     // Returnerar true om studenten gick med, annars false (och säger till varför).
     public bool Join(Course course)
@@ -30,6 +32,12 @@ class Student
         if (courses.Contains(course))
         {
             Console.WriteLine($"{Name} är redan anmäld till {course.Name}.");
+            return false;
+        }
+
+        if (course.Students.Count >= course.MaxSeats)
+        {
+            Console.WriteLine($"Kursen är full: {course.Name} har bara {course.MaxSeats} platser, {Name} kom inte med.");
             return false;
         }
 
