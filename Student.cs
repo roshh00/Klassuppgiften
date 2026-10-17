@@ -1,11 +1,9 @@
-// En studerande. En studerande kan gå flera kurser.
 class Student
 {
     public string Name { get; }
 
     private readonly List<Course> courses = new List<Course>();
 
-    // Skrivskyddad vy, se kommentaren i Course.
     public IReadOnlyList<Course> Courses => courses;
 
     public Student(string name)
@@ -18,11 +16,8 @@ class Student
         Name = name;
     }
 
-    // Går med i en kurs. Det är här reglerna sitter:
-    //  1. samma kurs får inte hamna två gånger (inga dubbletter)
-    //  2. kursen får inte vara full (MaxSeats)
-    // Går allt bra uppdateras BÅDA sidor: kursens Students och studentens Courses.
-    // Returnerar true om studenten gick med, annars false (och säger till varför).
+    // Går allt bra uppdateras båda sidorna kursens Students och studentens Courses
+    // Returnerar true om studenten gick med, annars false
     public bool Join(Course course)
     {
         if (course == null)
@@ -47,8 +42,11 @@ class Student
         return true;
     }
 
-    // Lämnar en kurs och uppdaterar båda sidor.
-    // Är studenten inte anmäld händer inget mer än att vi säger till (ingen krasch).
+    // Lämnar en kurs och uppdaterar båda sidor
+
+    // Är studenten inte anmäld händer inget 
+
+    // Den kraschar inte
     public bool Leave(Course course)
     {
         if (course == null)
