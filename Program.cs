@@ -50,26 +50,6 @@ david.Leave(webb);
 webb.Remove(david);
 bilal.Leave(csharp);       // Bilal avanmäldes redan i steg 4
 
-Rubrik
-("7. Ogiltiga värden");
-try
-{
-    Course ingenPlats = new Course("Tom kurs", 0);
-}
-catch (ArgumentOutOfRangeException exception)
-{
-    Console.WriteLine($"Fel: {exception.Message}");
-}
-
-try
-{
-    csharp.Enroll(null);
-}
-catch (ArgumentNullException)
-{
-    Console.WriteLine("Fel: kan inte anmäla null.");
-}
-
 void Rubrik(string text)
 {
     Console.WriteLine();
